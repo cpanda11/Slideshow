@@ -3,16 +3,16 @@
 // Last updated: March 9th, 2007
 // -------------------------------------------------------------------
 
-var _dropinslideshowcount=0
+var _dropinslideshowcount=0;
 
 function dropinslideshow(imgarray, w, h, delay){
-    this.id="_dropslide"+(++_dropinslideshowcount) //Generate unique ID for this slideshow instance (automated)
-    this.createcontainer(parseInt(w), parseInt(h))
-    this.delay=delay
-    this.imgarray=imgarray
-    var preloadimages=[]
+    this.id="_dropslide"+(++_dropinslideshowcount); //Generate unique ID for this slideshow instance (automated)
+    this.createcontainer(parseInt(w), parseInt(h));
+    this.delay=delay;
+    this.imgarray=imgarray;
+    var preloadimages=[];
     for (var i=0; i<imgarray.length; i++){
-        preloadimages[i]=new Image()
+        preloadimages[i]=new Image();
         preloadimages[i].src=imgarray[i][0]
     }
     this.animatestartpos=parseInt(h)*(-1) //Starting "top" position of an image before it drops in
@@ -33,10 +33,11 @@ dropinslideshow.prototype.createcontainer=function(w, h){
     // document.write('<div style="position:absolute; width:'+w+'px; height:'+h+'px; top:0;"></div>');
     // document.write('<div style="position:absolute; width:'+w+'px; height:'+h+'px; top:-'+h+'px;"></div>');
     // document.write('</div>');
-
-    document.getElementById('slideshow').innerHTML = '<div id="'+this.id+'" style="position:relative; width:'+w+'px; height:'+h+'px; overflow:hidden">' +
-        '<div style="position:absolute; width:'+w+'px; height:'+h+'px; top:0;"></div>' +
-        '<div style="position:absolute; width:'+w+'px; height:'+h+'px; top:-'+h+'px;"></div></div>';
+    let _w = $(window).width();
+    let _h = $(window).height();
+    document.getElementById('slideshow').innerHTML = '<div id="'+this.id+'" style="position:relative; width:'+_w+'px; height:'+_h+'px; overflow:hidden">' +
+        '<div style="position:absolute; width:'+_w+'px; height:'+_h+'px; top:0;"></div>' +
+        '<div style="position:absolute; width:'+_w+'px; height:'+_h+'px; top:-'+_h+'px;"></div></div>';
 
     this.slideshowref=document.getElementById(this.id);
     this.canvases=[];

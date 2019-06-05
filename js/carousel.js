@@ -10,8 +10,8 @@ function Carousel(Car_Image_Sources, Car_Speed) {
     var Car_Direction=true;		// true or false
     var Car_NoOfSides=8;		// must be 4, 6, 8 or 12
 
-    document.getElementById('slideshow').innerHTML = '<div id="Carousel" style="position:relative">\n' +
-        '</div>';
+    // document.getElementById('slideshow').innerHTML = '<div id="Carousel" style="position:relative"></div>';
+    document.getElementById('slideshow').innerHTML = '<div id="Carousel"></div>';
 
     /***************** DO NOT EDIT BELOW **********************************/
     CW_I=new Array(Car_NoOfSides/2+1);C_ClcW=new Array(Car_NoOfSides/2);
@@ -47,13 +47,17 @@ function Carousel(Car_Image_Sources, Car_Speed) {
     function CarImages(){
         if(!C_Stppd){
             C_TotalW=0;
+            Car_Image_Width = $(window).width()/2.62;
+            Car_Image_Height = $(window).height()-10;
             for(i=0;i<C_HalfNo;i++){
-                C_ClcW[i]=Math.round(Math.cos(Math.abs(C_Coef[C_CoefOf+i]+C_Angle))*Car_Image_Width);
+                C_ClcW[i]=Math.round(Math.cos(Math.abs(C_Coef[C_CoefOf+i]+C_Angle))* Car_Image_Width);
                 C_TotalW+=C_ClcW[i]}
+            C_MaxW=Car_Image_Width/Math.sin(Math.PI/Car_NoOfSides)+C_HalfNo+1;
             C_LeftOffset=(C_MaxW-C_TotalW)/2;
             for(i=0;i<C_HalfNo;i++){
                 CW_I[i].style.left=C_LeftOffset+"px";
                 CW_I[i].style.width=C_ClcW[i]+"px";
+                CW_I[i].style.height=Car_Image_Height+"px";
                 C_LeftOffset+=C_ClcW[i]}
             C_Angle+=Car_Speed/720*Math.PI*(Car_Direction?-1:1);
             if((Car_Direction&&C_Angle<=0)||(!Car_Direction&&C_Angle>=Math.PI/C_HalfNo)){

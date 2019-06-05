@@ -73,6 +73,20 @@
                     carousel(effectParams);
                     break;
             }
+        };
+        window.onresize = function () {
+            vpw = $(window).width();
+            vph = $(window).height();
+            $('#slideshow').css({'height': vph + 'px', 'width': vpw});
+
+            if(plyEffect === "dropin"){
+                $("#_dropslide1").css({"width":vpw, "height":vph});
+                $("#_dropslide1 div:first-child").css({"width":vpw, "height":vph});
+                $("#_dropslide1 div:nth-child(2)").css({"width":vpw, "height":vph});
+            }
+            else if(plyEffect === "kenburn"){
+                $("#slideshow .kb-slide").css({"width":vpw, "height":vph});
+            }
         }
     </script>
 </body>
