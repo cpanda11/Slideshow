@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/jquery-1.8.2.min.js"></script>
+
+    <script type="text/javascript" src="js/kenburns.js"></script>
+    <script type="text/javascript" src="js/dropinslideshow.js"></script>
+    <script type="text/javascript" src="js/carousel.js"></script>
+
+</head>
+<body>
+
+    <div id="slideshow" class="col-md-12"></div>
+
+    <script src="./getimages.php"></script>
+
+    <script type="text/javascript">
+        function kenburns(eParam){
+            $(document).ready(function() {
+                $('#slideshow').Kenburns({
+                    images: galleryarray,
+                    scale: eParam["scale"],
+                    duration: eParam["duration"],
+                    fadeSpeed:eParam["fadespeed"],
+                    ease3d:'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
+                });
+            });
+        }
+
+        function dropIn(eParam){
+            //Define Image Array. Syntax: ["image_path", "url_destination", "url_target"]
+            let myimages=[];
+            galleryarray.forEach(function (item, index) {
+               myimages[index]=[item , "", ""]
+            });
+
+            //Create new drop-in slideshow
+            //Syntax: new dropinslideshow(image_array, slideshow_width, slideshow_height, delay_before_rotation)
+            new dropinslideshow(myimages, $(window).width(), $(window).height(), eParam["delaytime"])
+
+        }
+        function carousel(eParam){
+            let myimages=[];
+            let id=0;
+            for(let i=0; i<4; i++)
+            {
+                myimages[id]=galleryarray[i];
+                myimages[id+1]="";
+                id = id + 2;
+            }
+            console.log(myimages);
+            Carousel(myimages, eParam["carspeed"]);
+
+        }
+        window.onload=function(){
+            vpw = $(window).width();
+            vph = $(window).height();
+            $('#slideshow').css({'height': vph + 'px', 'width': vpw});
+            console.log("effect name: " +plyEffect);
+            console.log("params value: " +effectParams["scale"]);
+
+            switch (plyEffect){
+                case "kenburn":
+                    kenburns(effectParams);
+                    break;
+                case "dropin":
+                    dropIn(effectParams);
+                    break;
+                case "carousel":
+                    carousel(effectParams);
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

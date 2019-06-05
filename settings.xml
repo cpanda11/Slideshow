@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Setting>
+    <Slideshows>
+        <effect>carousel</effect>
+    </Slideshows>
+    <Effects>
+        <kenburn>
+            <scale>0.75</scale>
+            <duration>5000</duration>
+            <fadespeed>1000</fadespeed>
+        </kenburn>
+        <dropin>
+            <delaytime>3000</delaytime>
+        </dropin>
+        <carousel>
+            <carspeed>3</carspeed>
+        </carousel>
+    </Effects>
+</Setting>
